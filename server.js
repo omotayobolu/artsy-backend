@@ -4,6 +4,8 @@ const express = require("express");
 const app = express();
 
 const connectDB = require("./db/connect");
+const MarketplaceRouter = require("./routes/marketplace");
+
 const errorHandlerMiddleware = require("./middlewares/error-handler");
 const notFoundMiddleware = require("./middlewares/not-found");
 
@@ -12,6 +14,8 @@ app.use(express.json());
 app.get("/", (res) => {
   res.send("Artsy API");
 });
+
+app.use("/marketplace", MarketplaceRouter);
 
 app.use(errorHandlerMiddleware);
 app.use(notFoundMiddleware);

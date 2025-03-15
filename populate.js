@@ -1,7 +1,7 @@
 require("dotenv").config();
 
 const connectDB = require("./db/connect");
-const MarketPlace = require("./models/MarketPlace");
+const MarketPlace = require("./models/marketplace");
 
 const MarketPlaceJson = require("./Marketplace.json");
 
