@@ -69,7 +69,26 @@ const getMarketplaceProduct = async (req, res) => {
   }
 };
 
+const updateMarketplaceProduct = async (req, res) => {
+  try {
+    const { id: productID } = req.params;
+    console.log(req.body);
+    const product = await MarketPlace.findOneAndUpdate(
+      { _id: productID },
+      { $set: req.body },
+      {
+        new: true,
+        runValidators: true,
+      }
+    );
+    res.status(200).json(product);
+  } catch (error) {
+    res.status(500).json({ error: "Something went wrong" });
+  }
+};
+
 module.exports = {
   getAllMarketplaceProducts,
   getMarketplaceProduct,
+  updateMarketplaceProduct,
 };
