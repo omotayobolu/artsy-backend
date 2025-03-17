@@ -56,6 +56,20 @@ const getAllMarketplaceProducts = async (req, res) => {
   res.status(200).json({ noOfProducts: products.length, products });
 };
 
+const getMarketplaceProduct = async (req, res) => {
+  try {
+    const { id: productID } = req.params;
+    const product = await MarketPlace.findOne({ _id: productID });
+    if (!product) {
+      res.status(404).json(`No task with id: ${productID}`);
+    }
+    res.status(200).json(product);
+  } catch (error) {
+    res.status(500).json({ error: "Something went wrong" });
+  }
+};
+
 module.exports = {
   getAllMarketplaceProducts,
+  getMarketplaceProduct,
 };

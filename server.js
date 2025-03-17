@@ -17,8 +17,8 @@ app.get("/", (res) => {
 
 app.use("/marketplace", MarketplaceRouter);
 
-app.use(errorHandlerMiddleware);
 app.use(notFoundMiddleware);
+app.use(errorHandlerMiddleware);
 
 const PORT = process.env.PORT;
 
