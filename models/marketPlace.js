@@ -8,7 +8,7 @@ const marketplaceSchema = new mongoose.Schema({
   creator: String,
   location: String,
   views: Number,
-  isLiked: { type: Boolean, defult: false },
+  isLiked: { type: Boolean, default: false },
   description: String,
   listing: String,
   status: String,
