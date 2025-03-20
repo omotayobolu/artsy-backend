@@ -1,0 +1,110 @@
+[
+  {
+    "name": "Antique Gold Watch",
+    "image": "https://th.bing.com/th/id/OIP.IVT3U_-C2AqPRfJoQNyHpwHaE7?rs=1&pid=ImgDetMain",
+    "isLiked": false,
+    "creator": "John Doe",
+    "currentBid": 120,
+    "highestBid": 150,
+    "bids": [],
+    "status": "live",
+    "startTime": "2025-03-25T10:00:00Z",
+    "endTime": "2025-03-26T10:00:00Z"
+  },
+  {
+    "name": "Elegant Dining Set",
+    "image": "https://images.pexels.com/photos/4938515/pexels-photo-4938515.jpeg?auto=compress&cs=tinysrgb&w=600",
+    "isLiked": false,
+    "creator": "Alice Smith",
+    "currentBid": 500,
+    "highestBid": 620,
+    "bids": [],
+    "status": "upcoming",
+    "startTime": "2025-03-24T09:00:00Z",
+    "endTime": "2025-03-25T09:00:00Z"
+  },
+  {
+    "name": "Vintage Suitcase",
+    "image": "https://images.pexels.com/photos/6492156/pexels-photo-6492156.jpeg?auto=compress&cs=tinysrgb&w=600",
+    "isLiked": false,
+    "creator": "Michael Brown",
+    "currentBid": 80,
+    "highestBid": 100,
+    "bids": [],
+    "status": "live",
+    "startTime": "2025-03-22T12:00:00Z",
+    "endTime": "2025-03-23T12:00:00Z"
+  },
+  {
+    "name": "Swiss River Painting",
+    "image": "https://images.pexels.com/photos/31092657/pexels-photo-31092657/free-photo-of-historic-swiss-building-by-a-serene-river.jpeg?auto=compress&cs=tinysrgb&w=600",
+    "isLiked": false,
+    "creator": "Sarah Johnson",
+    "currentBid": 300,
+    "highestBid": 350,
+    "bids": [],
+    "status": "live",
+    "startTime": "2025-03-22T15:00:00Z",
+    "endTime": "2025-03-23T15:00:00Z"
+  },
+  {
+    "name": "Classic Wooden Chair",
+    "image": "https://images.pexels.com/photos/13348136/pexels-photo-13348136.jpeg?auto=compress&cs=tinysrgb&w=600",
+    "isLiked": false,
+    "creator": "Tom Williams",
+    "currentBid": 45,
+    "highestBid": 60,
+    "bids": [],
+    "status": "upcoming",
+    "startTime": "2025-03-25T08:00:00Z",
+    "endTime": "2025-03-26T08:00:00Z"
+  },
+  {
+    "name": "Luxury Car Model",
+    "image": "https://images.pexels.com/photos/13789667/pexels-photo-13789667.jpeg?auto=compress&cs=tinysrgb&w=600",
+    "isLiked": false,
+    "creator": "Emily Adams",
+    "currentBid": 1200,
+    "highestBid": 1400,
+    "bids": [],
+    "status": "live",
+    "startTime": "2025-03-22T18:00:00Z",
+    "endTime": "2025-03-23T18:00:00Z"
+  },
+  {
+    "name": "Architectural Model",
+    "image": "https://images.pexels.com/photos/31042339/pexels-photo-31042339/free-photo-of-modern-urban-architecture-with-geometric-patterns.jpeg?auto=compress&cs=tinysrgb&w=600",
+    "isLiked": false,
+    "creator": "Oliver Green",
+    "currentBid": 850,
+    "highestBid": 900,
+    "bids": [],
+    "status": "live",
+    "startTime": "2025-04-12T20:00:00Z",
+    "endTime": "2025-04-13T20:00:00Z"
+  },
+  {
+    "name": "Vintage Book Collection",
+    "image": "https://images.pexels.com/photos/2741247/pexels-photo-2741247.jpeg?auto=compress&cs=tinysrgb&w=600",
+    "isLiked": false,
+    "creator": "Sophia Martinez",
+    "currentBid": 100,
+    "highestBid": 130,
+    "bids": [],
+    "status": "upcoming",
+    "startTime": "2025-03-26T09:00:00Z",
+    "endTime": "2025-03-27T09:00:00Z"
+  },
+  {
+    "name": "Milky Way Poster",
+    "image": "https://images.pexels.com/photos/957010/milky-way-starry-sky-night-sky-star-957010.jpeg?auto=compress&cs=tinysrgb&w=600",
+    "isLiked": false,
+    "creator": "Liam Cooper",
+    "currentBid": 30,
+    "highestBid": 50,
+    "bids": [],
+    "status": "live",
+    "startTime": "2025-04-12T22:00:00Z",
+    "endTime": "2025-05-13T22:00:00Z"
+  }
+]
