@@ -6,6 +6,8 @@ const app = express();
 const connectDB = require("./db/connect");
 const MarketplaceRouter = require("./routes/marketplace");
 const CartRouter = require("./routes/cart");
+const AuctionRouter = require("./routes/auction");
+const Subscribe = require("./routes/newsletter");
 
 const errorHandlerMiddleware = require("./middlewares/error-handler");
 const notFoundMiddleware = require("./middlewares/not-found");
@@ -19,6 +21,8 @@ app.get("/", (res) => {
 
 app.use("/marketplace", MarketplaceRouter);
 app.use("/cart", CartRouter);
+app.use("/auctions", AuctionRouter);
+app.use("/", Subscribe);
 
 app.use(notFoundMiddleware);
 app.use(errorHandlerMiddleware);
