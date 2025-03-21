@@ -1,4 +1,4 @@
-const MarketPlace = require("../models/marketplace");
+const Marketplace = require("../models/marketplace");
 
 const getAllMarketplaceProducts = async (req, res) => {
   const { category, creator, priceFilter, sortByPrice, name } = req.query;
@@ -44,7 +44,7 @@ const getAllMarketplaceProducts = async (req, res) => {
     });
   }
 
-  let result = MarketPlace.find(queryObject);
+  let result = Marketplace.find(queryObject);
 
   if (sortByPrice === "ascending") {
     result = result.sort({ price: 1 });
@@ -59,7 +59,7 @@ const getAllMarketplaceProducts = async (req, res) => {
 const getMarketplaceProduct = async (req, res) => {
   try {
     const { id: productID } = req.params;
-    const product = await MarketPlace.findOne({ _id: productID });
+    const product = await Marketplace.findOne({ _id: productID });
     if (!product) {
       return res.status(404).json(`No task with id: ${productID}`);
     }
@@ -72,7 +72,7 @@ const getMarketplaceProduct = async (req, res) => {
 const updateMarketplaceProduct = async (req, res) => {
   try {
     const { id: productID } = req.params;
-    const product = await MarketPlace.findOneAndUpdate(
+    const product = await Marketplace.findOneAndUpdate(
       { _id: productID },
       { $set: req.body },
       {
