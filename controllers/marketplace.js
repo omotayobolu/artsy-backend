@@ -61,7 +61,7 @@ const getMarketplaceProduct = async (req, res) => {
     const { id: productID } = req.params;
     const product = await MarketPlace.findOne({ _id: productID });
     if (!product) {
-      res.status(404).json(`No task with id: ${productID}`);
+      return res.status(404).json(`No task with id: ${productID}`);
     }
     res.status(200).json(product);
   } catch (error) {
@@ -72,7 +72,6 @@ const getMarketplaceProduct = async (req, res) => {
 const updateMarketplaceProduct = async (req, res) => {
   try {
     const { id: productID } = req.params;
-    console.log(req.body);
     const product = await MarketPlace.findOneAndUpdate(
       { _id: productID },
       { $set: req.body },
