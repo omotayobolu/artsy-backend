@@ -14,4 +14,6 @@ const marketplaceSchema = new mongoose.Schema({
   status: String,
 });
 
-module.exports = mongoose.model("MarketPlace", marketplaceSchema);
+const Marketplace = mongoose.model("MarketPlace", marketplaceSchema);
+
+module.exports = Marketplace;
