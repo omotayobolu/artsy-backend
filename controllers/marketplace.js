@@ -52,7 +52,7 @@ const getAllMarketplaceProducts = async (req, res) => {
     result = result.sort({ price: -1 });
   }
 
-  const limit = Number(req.query.limit) || 10;
+  const limit = Number(req.query.limit) || 9;
 
   result = result.limit(limit);
 
