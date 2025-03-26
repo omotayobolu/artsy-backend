@@ -53,8 +53,9 @@ const getAllMarketplaceProducts = async (req, res) => {
   }
 
   const limit = Number(req.query.limit) || 9;
+  const offset = Number(req.query.offset) || 0;
 
-  result = result.limit(limit);
+  result = result.skip(offset).limit(limit);
 
   const products = await result;
   res.status(200).json({ noOfProducts: products.length, products });
