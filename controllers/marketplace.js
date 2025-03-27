@@ -52,10 +52,10 @@ const getAllMarketplaceProducts = async (req, res) => {
     result = result.sort({ price: -1 });
   }
 
-  const limit = Number(req.query.limit) || 9;
-  const offset = Number(req.query.offset) || 0;
+  // const limit = Number(req.query.limit) || 9;
+  // const offset = Number(req.query.offset) || 0;
 
-  result = result.skip(offset).limit(limit);
+  // result = result.skip(offset).limit(limit);
 
   const products = await result;
   res.status(200).json({ noOfProducts: products.length, products });

@@ -34,10 +34,6 @@ app.use(
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.get("/", (res) => {
-  res.send("Artsy API");
-});
-
 app.use("/marketplace", MarketplaceRouter);
 app.use("/cart", CartRouter);
 app.use("/auctions", AuctionRouter);
