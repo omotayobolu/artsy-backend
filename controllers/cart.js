@@ -25,7 +25,16 @@ const addOrUpdateCart = async (req, res) => {
     if (!cart) {
       cart = new Cart({
         userId,
-        products: [],
+        products: [
+          {
+            productId,
+            name,
+            price: price * quantity,
+            image,
+            quantity,
+            category,
+          },
+        ],
       });
     } else {
       const existingProduct = cart.products.find(
