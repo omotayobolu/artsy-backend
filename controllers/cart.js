@@ -1,7 +1,7 @@
 const Cart = require("../models/cartModel");
 
 const getCart = async (req, res) => {
-  const { userId } = req.body;
+  const { userId } = req.query;
   try {
     const cart = await Cart.findOne({ userId });
     if (!cart) {
