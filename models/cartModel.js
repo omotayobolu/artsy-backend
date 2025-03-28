@@ -10,6 +10,8 @@ const cartSchema = new mongoose.Schema({
       quantity: { type: Number, required: true, min: 1 },
       price: { type: Number, required: true },
       image: { type: String, required: true },
+      creator: { type: String, required: true },
+      location: { type: String, required: true },
     },
   ],
   totalPrice: {
