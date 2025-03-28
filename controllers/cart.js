@@ -16,8 +16,17 @@ const getCart = async (req, res) => {
 };
 
 const addOrUpdateCart = async (req, res) => {
-  const { productId, userId, name, image, price, quantity, category } =
-    req.body;
+  const {
+    productId,
+    userId,
+    name,
+    image,
+    price,
+    quantity,
+    category,
+    creator,
+    location,
+  } = req.body;
 
   try {
     let cart = await Cart.findOne({ userId });
@@ -33,6 +42,8 @@ const addOrUpdateCart = async (req, res) => {
             image,
             quantity,
             category,
+            creator,
+            location,
           },
         ],
       });
@@ -52,6 +63,8 @@ const addOrUpdateCart = async (req, res) => {
           image,
           quantity,
           category,
+          creator,
+          location,
         });
       }
     }
