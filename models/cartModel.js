@@ -14,6 +14,10 @@ const cartSchema = new mongoose.Schema({
       location: { type: String },
     },
   ],
+  totalItems: {
+    type: Number,
+    default: 0,
+  },
   totalPrice: {
     type: Number,
     default: 0,
@@ -31,6 +35,11 @@ const cartSchema = new mongoose.Schema({
 cartSchema.methods.calculateTotal = function () {
   this.totalPrice = this.products.reduce(
     (total, item) => total + item.price,
+    0
+  );
+
+  this.totalItems = this.products.reduce(
+    (total, item) => total + item.quantity,
     0
   );
 
