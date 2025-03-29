@@ -107,24 +107,38 @@ const deleteFromCart = async (req, res) => {
 };
 
 const updateQuantity = async (req, res) => {
-  const { userId, productId, quantity, price } = req.body;
+  const { userId, productId, quantity } = req.body;
   try {
-    const cart = await Cart.findOneAndUpdate(
-      { userId, "products.productId": productId },
-      {
-        $set: {
-          "products.$.quantity": quantity,
-          "products.$.price": price * quantity,
-        },
-      },
-      { new: true }
+    const cart = await Cart.findOne({ userId });
+
+    if (!userId) {
+      return res.status(400).json({ message: "userId is required!" });
+    }
+
+    if (!productId) {
+      return res.status(400).json({ message: "ProductID is required!" });
+    }
+
+    const product = cart.products.find(
+      (item) => item.productId.toString() === productId
     );
+
+    if (!product) {
+      return res.status(404).json({ message: "Product not found in cart!" });
+    }
+
+    product.quantity = quantity;
+    product.price = (product.price / product.quantity) * quantity;
 
     cart.calculateTotal();
 
     await cart.save();
 
-    res.status(200).json({ status: "success", cart });
+    res.status(200).json({
+      status: "success",
+      message: "Quantity updated successfully!",
+      cart,
+    });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "something went wrong!" });
