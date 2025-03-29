@@ -127,8 +127,10 @@ const updateQuantity = async (req, res) => {
       return res.status(404).json({ message: "Product not found in cart!" });
     }
 
+    const unitPrice = product.price / product.quantity;
+
     product.quantity = quantity;
-    product.price = (product.price / product.quantity) * quantity;
+    product.price = unitPrice * quantity;
 
     cart.calculateTotal();
 
