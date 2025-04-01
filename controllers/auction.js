@@ -28,11 +28,11 @@ const getAuction = async (req, res) => {
 const placeBid = async (req, res) => {
   try {
     const { id: auctionId } = req.params;
-    const { bidder, amount } = req.body;
-    if (!bidder || !amount) {
-      return res
-        .status(400)
-        .json({ message: "Bidder and amount are required" });
+    const { bidder, message } = req.body;
+    if (!bidder || !message) {
+      return res.status(400).json({
+        message: "Both bidder and amount are necessary to place a bid.",
+      });
     }
     const auction = await Auction.findOne({ _id: auctionId });
 
@@ -42,15 +42,17 @@ const placeBid = async (req, res) => {
         .json({ message: "Bidding is not live for this auction." });
     }
 
-    const extractedAmount = parseFloat(
-      amount.toString().match(/\d+(\.\d+)?/)?.[0]
-    );
+    const result = message.toString().match(/\$?\d+(\.\d{1,2})?/);
 
-    if (isNaN(extractedAmount)) {
-      return res.status(200).json({
-        message: "No valid bid amount. Auction remains unchanged.",
-      });
-    }
+    const extractedAmount = result
+      ? parseFloat(result[0].replace("$", ""))
+      : null;
+
+    // if (isNaN(extractedAmount)) {
+    //   return res.status(200).json({
+    //     message: "No valid bid amount. Auction remains unchanged.",
+    //   });
+    // }
 
     if (extractedAmount <= auction.highestBid) {
       return res.status(400).json({
@@ -61,6 +63,7 @@ const placeBid = async (req, res) => {
     const newBid = {
       bidder: bidder,
       amount: extractedAmount,
+      message: message,
       timestamp: new Date(),
     };
 

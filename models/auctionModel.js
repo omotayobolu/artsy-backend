@@ -11,6 +11,7 @@ const auctionSchema = new mongoose.Schema({
     {
       bidder: { type: String, required: true },
       amount: { type: Number, required: true },
+      message: { type: String },
       timestamp: { type: Date, default: Date.now },
     },
   ],
@@ -25,6 +26,7 @@ const auctionSchema = new mongoose.Schema({
 
 const bidSchema = new mongoose.Schema({
   bidder: { type: String, required: true },
+  message: { type: String, required: true },
   amount: { type: Number, required: true },
 });
 
