@@ -42,7 +42,17 @@ const placeBid = async (req, res) => {
         .json({ message: "Bidding is not live for this auction." });
     }
 
-    if (amount <= auction.highestBid) {
+    const extractedAmount = parseFloat(
+      amount.toString().match(/\d+(\.\d+)?/)?.[0]
+    );
+
+    if (isNaN(extractedAmount)) {
+      return res.status(200).json({
+        message: "No valid bid amount. Auction remains unchanged.",
+      });
+    }
+
+    if (extractedAmount <= auction.highestBid) {
       return res.status(400).json({
         message: "Bid must be larger than the highest bid",
       });
@@ -50,12 +60,12 @@ const placeBid = async (req, res) => {
 
     const newBid = {
       bidder: bidder,
-      amount: amount,
+      amount: extractedAmount,
       timestamp: new Date(),
     };
 
     auction.bids.push(newBid);
-    auction.highestBid = amount;
+    auction.highestBid = extractedAmount;
 
     await auction.save();
 
