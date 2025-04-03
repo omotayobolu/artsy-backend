@@ -56,7 +56,7 @@ const placeBid = async (req, res) => {
 
     if (extractedAmount <= auction.highestBid) {
       return res.status(400).json({
-        message: "Bid must be larger than the highest bid",
+        message: "Bid must be higher than the current bid",
       });
     }
 
