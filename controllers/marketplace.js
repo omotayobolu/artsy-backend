@@ -6,7 +6,12 @@ const getAllMarketplaceProducts = async (req, res) => {
   const queryObject = {};
 
   if (category) {
-    queryObject.category = category;
+    if (category.includes(",")) {
+      const categoryArray = category.split(",");
+      queryObject.category = { $in: categoryArray };
+    } else {
+      queryObject.category = category;
+    }
   }
 
   if (creator) {
