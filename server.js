@@ -30,6 +30,7 @@ app.use(
     },
     methods: "GET,POST,PATCH,DELETE",
     allowedHeaders: "Content-Type,Authorization",
+    credentials: true,
   })
 );
 app.use(express.json());
@@ -41,23 +42,28 @@ app.use("/auctions", AuctionRouter);
 app.use("/", Subscribe);
 
 app.post("/checkout", async (req, res) => {
-  const { products } = req.body;
-  let lineItems = [];
-  products.forEach((product) => {
-    lineItems.push({
-      price: product.id,
-      quantity: product.quantity,
+  try {
+    const { products } = req.body;
+    let lineItems = [];
+    products.forEach((product) => {
+      lineItems.push({
+        price: product.id,
+        quantity: product.quantity,
+      });
     });
-  });
 
-  const session = await stripe.checkout.session.create({
-    line_items: lineItems,
-    mode: "payment",
-    success_url: `http://localhost:5173/success`,
-    cancel_url: `http://localhost:5173/cancel`,
-  });
+    const session = await stripe.checkout.session.create({
+      line_items: lineItems,
+      mode: "payment",
+      success_url: `http://localhost:5173/success`,
+      cancel_url: `http://localhost:5173/cancel`,
+    });
 
-  res.send(JSON.stringify({ url: session.url }));
+    res.send(JSON.stringify({ url: session.url }));
+  } catch (error) {
+    console.error("Error creating checkout session:", error);
+    res.status(500).json({ message: "Internal Server Error" });
+  }
 });
 
 app.use(notFoundMiddleware);
