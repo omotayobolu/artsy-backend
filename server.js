@@ -1,6 +1,7 @@
 require("dotenv").config();
 
 const express = require("express");
+const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 const app = express();
 
 const cors = require("cors");
@@ -38,6 +39,26 @@ app.use("/marketplace", MarketplaceRouter);
 app.use("/cart", CartRouter);
 app.use("/auctions", AuctionRouter);
 app.use("/", Subscribe);
+
+app.post("/checkout", async (req, res) => {
+  const { products } = req.body;
+  let lineItems = [];
+  products.forEach((product) => {
+    lineItems.push({
+      price: product.id,
+      quantity: product.quantity,
+    });
+  });
+
+  const session = await stripe.checkout.session.create({
+    line_items: lineItems,
+    mode: "payment",
+    success_url: `http://localhost:5173/success`,
+    cancel_url: `http://localhost:5173/cancel`,
+  });
+
+  res.send(JSON.stringify({ url: session.url }));
+});
 
 app.use(notFoundMiddleware);
 app.use(errorHandlerMiddleware);
