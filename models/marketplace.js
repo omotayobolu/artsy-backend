@@ -12,6 +12,7 @@ const marketplaceSchema = new mongoose.Schema({
   description: String,
   listing: String,
   status: String,
+  stripePriceId: String,
 });
 
 const Marketplace = mongoose.model("MarketPlace", marketplaceSchema);

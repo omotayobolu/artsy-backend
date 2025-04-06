@@ -43,16 +43,22 @@ app.use("/", Subscribe);
 
 app.post("/checkout", async (req, res) => {
   try {
-    const { products } = req.body;
+    const products = req.body;
     let lineItems = [];
+
+    if (products.length === 0) {
+      return res.status(400).json({ message: "No products provided" });
+    }
+
     products.forEach((product) => {
+      console.log(product);
       lineItems.push({
-        price: product.id,
+        price: product.stripePriceId,
         quantity: product.quantity,
       });
     });
 
-    const session = await stripe.checkout.session.create({
+    const session = await stripe.checkout.sessions.create({
       line_items: lineItems,
       mode: "payment",
       success_url: `http://localhost:5173/success`,
