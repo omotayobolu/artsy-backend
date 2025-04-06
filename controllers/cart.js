@@ -26,6 +26,7 @@ const addOrUpdateCart = async (req, res) => {
     category,
     creator,
     location,
+    stripePriceId,
   } = req.body;
 
   try {
@@ -44,6 +45,7 @@ const addOrUpdateCart = async (req, res) => {
             category,
             creator,
             location,
+            stripePriceId,
           },
         ],
       });
@@ -65,6 +67,7 @@ const addOrUpdateCart = async (req, res) => {
           category,
           creator,
           location,
+          stripePriceId,
         });
       }
     }
