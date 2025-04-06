@@ -12,6 +12,7 @@ const cartSchema = new mongoose.Schema({
       image: { type: String, required: true },
       creator: { type: String },
       location: { type: String },
+      stripePriceId: { type: String },
     },
   ],
   totalItems: {
