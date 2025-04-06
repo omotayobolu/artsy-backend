@@ -43,7 +43,7 @@ app.use("/", Subscribe);
 
 app.post("/checkout", async (req, res) => {
   try {
-    const products = req.body;
+    const { products } = req.body;
     let lineItems = [];
 
     if (products.length === 0) {
@@ -51,7 +51,6 @@ app.post("/checkout", async (req, res) => {
     }
 
     products.forEach((product) => {
-      console.log(product);
       lineItems.push({
         price: product.stripePriceId,
         quantity: product.quantity,
