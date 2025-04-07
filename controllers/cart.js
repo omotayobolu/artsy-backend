@@ -3,9 +3,14 @@ const Cart = require("../models/cartModel");
 const getCart = async (req, res) => {
   const { userId } = req.query;
   try {
-    const cart = await Cart.findOne({ userId });
+    if (!userId) {
+      return res.status(404).json({ message: "No cart fund for this user" });
+    }
+
+    let cart = await Cart.findOne({ userId });
+
     if (!cart) {
-      return res.status(404).json({ message: "Something went wrong" });
+      cart = await Cart.create({ userId, products: [] });
     }
 
     res.status(200).json({ status: "success", cart });
@@ -150,9 +155,20 @@ const updateQuantity = async (req, res) => {
   }
 };
 
+const clearCart = async (userId) => {
+  try {
+    await Cart.deleteMany({ userId });
+    return { success: true, message: "Cart cleared successfully!" };
+  } catch (error) {
+    console.error(error);
+    return { success: false, message: "something went wrong!" };
+  }
+};
+
 module.exports = {
   getCart,
   addOrUpdateCart,
   deleteFromCart,
   updateQuantity,
+  clearCart,
 };

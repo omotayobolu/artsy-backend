@@ -10,6 +10,7 @@ const MarketplaceRouter = require("./routes/marketplace");
 const CartRouter = require("./routes/cart");
 const AuctionRouter = require("./routes/auction");
 const Subscribe = require("./routes/newsletter");
+const { clearCart } = require("./controllers/cart");
 
 const errorHandlerMiddleware = require("./middlewares/error-handler");
 const notFoundMiddleware = require("./middlewares/not-found");
@@ -43,11 +44,16 @@ app.use("/", Subscribe);
 
 app.post("/checkout", async (req, res) => {
   try {
-    const { products } = req.body;
+    console.log(req.body);
+    const { products, userId } = req.body;
     let lineItems = [];
 
     if (products.length === 0) {
       return res.status(400).json({ message: "No products provided" });
+    }
+
+    if (!userId) {
+      return res.status(400).json({ message: "No user Id" });
     }
 
     products.forEach((product) => {
@@ -60,14 +66,41 @@ app.post("/checkout", async (req, res) => {
     const session = await stripe.checkout.sessions.create({
       line_items: lineItems,
       mode: "payment",
-      success_url: `http://localhost:5173/success`,
-      cancel_url: `http://localhost:5173/cancel`,
+      success_url: `http://localhost:5173/payment-success?session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: `http://localhost:5173/payment-failure`,
+      metadata: {
+        userId: userId,
+      },
     });
 
     res.send(JSON.stringify({ url: session.url }));
   } catch (error) {
     console.error("Error creating checkout session:", error);
     res.status(500).json({ message: "Internal Server Error" });
+  }
+});
+
+app.post("/clear-cart", async (req, res) => {
+  const { sessionId } = req.body;
+
+  if (!sessionId) {
+    return res.status(400).json({ message: "session_id is required" });
+  }
+
+  try {
+    const session = await stripe.checkout.sessions.retrieve(sessionId);
+    const userId = session.metadata.userId;
+    const result = await clearCart(userId);
+    if (result.success) {
+      return res
+        .status(200)
+        .json({ status: "success", message: result.message });
+    } else {
+      return res.status(500).json({ message: result.message });
+    }
+  } catch (error) {
+    console.error("Error clearing cart:", error);
+    res.status(500).json({ message: "Error clearing cart" });
   }
 });
 
