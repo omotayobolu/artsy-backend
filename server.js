@@ -17,7 +17,7 @@ const notFoundMiddleware = require("./middlewares/not-found");
 
 const allowedOrigins = [
   "http://localhost:5173",
-  // "https://your-frontend-domain.com",
+  "https://artsyphotography.vercel.app/",
 ];
 
 app.use(
